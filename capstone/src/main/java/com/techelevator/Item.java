@@ -57,13 +57,13 @@ public class Item {
 
     public String getMessage() {
         String message = "";
-        if (type.equals("chips")) {
+        if (type.equals("Chips")) {
             message = "Crunch Crunch, Yum!";
-        } else if (type.equals("candy")) {
+        } else if (type.equals("Candy")) {
             message = "Munch Munch, Yum!";
         } else if (type.equals("drink")) {
             message = "Glug Glug, Yum!";
-        } else if (type.equals("gum")) {
+        } else if (type.equals("Gum")) {
             message ="Chew Chew, Yum!";
         }
 
@@ -79,5 +79,11 @@ public class Item {
             itemCount = String.valueOf(count);
         }
         return slotLocation + ": " + productName + ": " + price + ": " + itemCount;
+    }
+
+    public boolean isSoldOut(){
+
+        return count == 0;
+
     }
 }
