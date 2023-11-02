@@ -9,6 +9,7 @@ public class VendingMachineCLI {
 	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE };
 
 	private Menu menu;
+	private DisplayMenus displayMenus;
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
