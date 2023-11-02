@@ -16,6 +16,13 @@ public class Item {
         this.type = type;
     }
 
+    public Item(String[] values) {
+        this.slotLocation = values[0];
+        this.productName = values[1];
+        this.price = Double.parseDouble(values[2]);
+        this.type = values[3];
+    }
+
     public String getSlotLocation() {
         return slotLocation;
     }
@@ -61,5 +68,16 @@ public class Item {
         }
 
         return message;
+    }
+
+    @Override
+    public String toString() {
+        String itemCount;
+        if (count == 0) {
+            itemCount = "SOLD OUT";
+        } else {
+            itemCount = String.valueOf(count);
+        }
+        return slotLocation + ": " + productName + ": " + price + ": " + itemCount;
     }
 }
