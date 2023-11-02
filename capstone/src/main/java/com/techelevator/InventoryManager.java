@@ -29,7 +29,7 @@ public class InventoryManager {
             } else if (wallet.compareTo(item.getPrice()) >= 0) {
 
                 System.out.println(item.getProductName());
-                System.out.println(getFormattedMoney(item.getPrice()));
+                System.out.println(Utility.formatMoney(item.getPrice()));
                 System.out.println(item.getMessage());
                 item.decreaseAmount();
 
@@ -37,7 +37,7 @@ public class InventoryManager {
             } else {
 
                 System.out.println("Insufficient Funds");
-
+                item = null;
             }
 
 
@@ -49,10 +49,6 @@ public class InventoryManager {
 
         return item;
 
-    }
-
-    public String getFormattedMoney(BigDecimal money) {
-        return String.format("$%.2f", money);
     }
 
 }

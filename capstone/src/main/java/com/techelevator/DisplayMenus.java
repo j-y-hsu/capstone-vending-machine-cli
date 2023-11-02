@@ -27,9 +27,7 @@ public class DisplayMenus {
     }
 
     public void displayItems() {
-        inventoryManager.getInventory().forEach((key, value) -> {
-            System.out.println(value);
-        });
+        inventoryManager.getInventory().forEach((key, value) -> System.out.println(value));
     }
 
 
@@ -39,7 +37,7 @@ public class DisplayMenus {
         while(true){
             System.out.println("                            ");
             System.out.println("****************************");
-            System.out.println("Current Money Provided: " + inventoryManager.getFormattedMoney(totalMoney) );
+            System.out.println("Current Money Provided: " + Utility.formatMoney(totalMoney) );
             System.out.println("****************************");
             String choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
@@ -54,9 +52,9 @@ public class DisplayMenus {
                 String itemWanted = userInput.nextLine();
 
                 Item item = inventoryManager.purchaseItem(itemWanted, totalMoney);
-                totalMoney = totalMoney.subtract(item.getPrice());
 
                 if(item != null) {
+                    totalMoney = totalMoney.subtract(item.getPrice());
                     FileManager.logWriter((item.getProductName() + " " + itemWanted), item.getPrice(), totalMoney);
                 }
             } else if (choice.equals(PURCHASE_MENU_FINISH_TRANSACTION)) {
@@ -108,13 +106,12 @@ public class DisplayMenus {
                 coins.put(coinName, coin.intValue());
             }
 
-            System.out.println("Your change is " + inventoryManager.getFormattedMoney(currentChange));
+            System.out.println("Your change is " + Utility.formatMoney(currentChange));
             coins.forEach((key, value) -> {
                 if (value != 0) {
                     System.out.println(key + ": " + value);
                 }
             });
-//            totalMoney = BigDecimal.ZERO;
             FileManager.logWriter("GIVE CHANGE:", currentChange, totalMoney);
         } else {
             System.out.println("No change");

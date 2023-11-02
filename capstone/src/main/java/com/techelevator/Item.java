@@ -11,16 +11,6 @@ public class Item {
     private String type;
     private int count = MAX_ITEM_COUNT;
 
-
-
-    public Item(String slotLocation, String productName, double price, String type, int count) {
-        this.slotLocation = slotLocation;
-        this.productName = productName;
-        this.price = BigDecimal.valueOf(price);
-        this.type = type;
-        this.count = count;
-    }
-
     public Item(String[] values) {
         this.slotLocation = values[0];
         this.productName = values[1];
@@ -32,32 +22,20 @@ public class Item {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public int getCount() {
+        return count;
     }
 
     public String getSlotLocation() {
         return slotLocation;
     }
 
-    public void setSlotLocation(String slotLocation) {
-        this.slotLocation = slotLocation;
-    }
-
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getMessage() {
@@ -75,11 +53,8 @@ public class Item {
         return message;
     }
 
-    @Override
-    public String toString() {
-        String itemCount = isSoldOut() ? "SOLD OUT" : String.valueOf(count);
-        String string = String.format("%s: %s: $%.2f: %s", slotLocation, productName, price, itemCount);
-        return string;
+    public int getAmountSold() {
+        return MAX_ITEM_COUNT - count;
     }
 
     public boolean isSoldOut(){
@@ -90,5 +65,12 @@ public class Item {
 
     public void decreaseAmount() {
         count--;
+    }
+
+    @Override
+    public String toString() {
+        String itemCount = isSoldOut() ? "SOLD OUT" : String.valueOf(count);
+        String string = String.format("%s: %s: $%.2f: %s", slotLocation, productName, price, itemCount);
+        return string;
     }
 }

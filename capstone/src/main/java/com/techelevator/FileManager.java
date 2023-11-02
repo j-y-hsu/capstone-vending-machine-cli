@@ -43,7 +43,6 @@ public class FileManager {
         File logFile = new File("log.txt");
         Date date = new Date();
 
-
         try(PrintWriter writer = new PrintWriter(new FileOutputStream(logFile, true))){
 
             writer.println(date + " " + message + " " + amount + " " + total );
@@ -52,10 +51,28 @@ public class FileManager {
             System.out.println("File not found");
         }
 
-
     }
 
+    public static void salesReport(InventoryManager inventoryManager) {
+        String salesReportPath = Utility.getDateTime() + ".txt";
+        System.out.println(salesReportPath);
+        File report = new File(salesReportPath);
 
+        try (PrintWriter writer = new PrintWriter(report)) {
+            BigDecimal totalSales = BigDecimal.ZERO;
+            for (Map.Entry<String, Item> entry : inventoryManager.getInventory().entrySet()) {
+                int count = entry.getValue().getAmountSold();
+                Item item = entry.getValue();
+                String line = item.getProductName() + "|" + count;
+                writer.println(line);
+                totalSales = totalSales.add(item.getPrice().multiply(BigDecimal.valueOf(count)));
+            }
+
+            writer.println("\n**TOTAL SALES** " + Utility.formatMoney(totalSales));
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found");
+        }
+    }
 
 
 }
