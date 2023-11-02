@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class InventoryManager {
@@ -14,7 +15,7 @@ public class InventoryManager {
         return inventory;
     }
 
-    public double purchaseItem(String selectedItem, double wallet){
+    public BigDecimal purchaseItem(String selectedItem, BigDecimal wallet) {
 
         if(inventory.containsKey(selectedItem)){
 
@@ -24,13 +25,13 @@ public class InventoryManager {
 
                 System.out.println("Sorry, that item is sold out");
 
-            } else if(wallet >= item.getPrice()) {
+            } else if(wallet.compareTo(item.getPrice()) >= 0) {
 
                 System.out.println(item.getProductName());
-                System.out.println(item.getPrice());
+                System.out.println(getFormattedMoney(item.getPrice()));
                 System.out.println(item.getMessage());
-
-                wallet -= item.getPrice();
+                item.decreaseAmount();
+                wallet = wallet.subtract(item.getPrice());
 
             } else {
 
@@ -48,4 +49,9 @@ public class InventoryManager {
         return wallet;
 
     }
+
+    public String getFormattedMoney(BigDecimal money) {
+        return String.format("$%.2f", money);
+    }
+
 }
