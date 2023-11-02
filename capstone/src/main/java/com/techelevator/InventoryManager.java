@@ -15,23 +15,24 @@ public class InventoryManager {
         return inventory;
     }
 
-    public BigDecimal purchaseItem(String selectedItem, BigDecimal wallet) {
+    public Item purchaseItem(String selectedItem, BigDecimal wallet) {
 
-        if(inventory.containsKey(selectedItem)){
+        Item item = null;
+        if (inventory.containsKey(selectedItem)) {
 
-            Item item = inventory.get(selectedItem);
+            item = inventory.get(selectedItem);
 
-            if(item.isSoldOut()){
+            if (item.isSoldOut()) {
 
                 System.out.println("Sorry, that item is sold out");
 
-            } else if(wallet.compareTo(item.getPrice()) >= 0) {
+            } else if (wallet.compareTo(item.getPrice()) >= 0) {
 
                 System.out.println(item.getProductName());
                 System.out.println(getFormattedMoney(item.getPrice()));
                 System.out.println(item.getMessage());
                 item.decreaseAmount();
-                wallet = wallet.subtract(item.getPrice());
+
 
             } else {
 
@@ -46,7 +47,7 @@ public class InventoryManager {
 
         }
 
-        return wallet;
+        return item;
 
     }
 

@@ -11,12 +11,7 @@ public class Item {
     private String type;
     private int count = MAX_ITEM_COUNT;
 
-//    public Item(String slotLocation, String productName, double price, String type) {
-//        this.slotLocation = slotLocation;
-//        this.productName = productName;
-//        this.price = price;
-//        this.type = type;
-//    }
+
 
     public Item(String slotLocation, String productName, double price, String type, int count) {
         this.slotLocation = slotLocation;

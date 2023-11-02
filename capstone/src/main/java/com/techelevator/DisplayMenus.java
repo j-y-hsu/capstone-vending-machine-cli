@@ -53,8 +53,12 @@ public class DisplayMenus {
                 System.out.println("Enter the number of the item you would like: ");
                 String itemWanted = userInput.nextLine();
 
-                totalMoney = inventoryManager.purchaseItem(itemWanted, totalMoney);
+                Item item = inventoryManager.purchaseItem(itemWanted, totalMoney);
+                totalMoney = totalMoney.subtract(item.getPrice());
 
+                if(item != null) {
+                    FileManager.logWriter((item.getProductName() + " " + itemWanted), item.getPrice(), totalMoney);
+                }
             } else if (choice.equals(PURCHASE_MENU_FINISH_TRANSACTION)) {
                 finishTransaction();
                 break;
@@ -75,7 +79,7 @@ public class DisplayMenus {
         String addedMoneyStr = userInput.nextLine();
         BigDecimal addedMoney = BigDecimal.valueOf(Double.parseDouble(addedMoneyStr));
         totalMoney = totalMoney.add(addedMoney);
-
+        FileManager.logWriter("FEED MONEY:", addedMoney, totalMoney );
     }
 
     public void finishTransaction() {
@@ -89,7 +93,7 @@ public class DisplayMenus {
 
         if (!currentChange.equals(BigDecimal.ZERO)) {
             for (int i = 0; i < coinValues.length; i++) {
-                BigDecimal coin = currentChange.divide(coinValues[i], 0,RoundingMode.FLOOR);
+                BigDecimal coin = totalMoney.divide(coinValues[i], 0,RoundingMode.FLOOR);
                 String coinName = "";
                 if (coinValues[i].equals(quarter)) {
                     coinName = "Quarter(s)";
@@ -100,17 +104,18 @@ public class DisplayMenus {
                 } else if (coinValues[i].equals(penny)) {
                     coinName = "Penny(ies)";
                 }
-                currentChange = currentChange.subtract(coin.multiply(coinValues[i]));
+                totalMoney = totalMoney.subtract(coin.multiply(coinValues[i]));
                 coins.put(coinName, coin.intValue());
             }
 
-            System.out.println("Your change is " + inventoryManager.getFormattedMoney(totalMoney));
+            System.out.println("Your change is " + inventoryManager.getFormattedMoney(currentChange));
             coins.forEach((key, value) -> {
                 if (value != 0) {
                     System.out.println(key + ": " + value);
                 }
             });
-            totalMoney = BigDecimal.ZERO;
+//            totalMoney = BigDecimal.ZERO;
+            FileManager.logWriter("GIVE CHANGE:", currentChange, totalMoney);
         } else {
             System.out.println("No change");
         }
