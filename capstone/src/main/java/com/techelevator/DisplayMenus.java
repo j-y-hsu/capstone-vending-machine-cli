@@ -33,10 +33,7 @@ public class DisplayMenus {
     public void purchaseItem(){
 
         while(true){
-            System.out.println("                            ");
-            System.out.println("****************************");
-            System.out.println("Current Money Provided: " + Utility.formatMoney(totalMoney) );
-            System.out.println("****************************");
+            FormatUtils.getMessage("Current Money Provided: " + FormatUtils.formatMoney(totalMoney)2);
             String choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
             if(choice.equals(PURCHASE_MENU_FEED_MONEY)){
@@ -46,7 +43,7 @@ public class DisplayMenus {
             } else if(choice.equals(PURCHASE_MENU_SELECT_PRODUCT)){
                 displayItems();
 
-                System.out.println("Enter the number of the item you would like: ");
+                FormatUtils.getMessage("Enter the number of the item you would like: ");
                 String itemWanted = userInput.nextLine().toUpperCase();
 
                 Item item = inventoryManager.purchaseItem(itemWanted, totalMoney);
@@ -66,23 +63,23 @@ public class DisplayMenus {
 
     public void addMoney(){
 
-        System.out.println("How much would you like to add?");
+        FormatUtils.getMessage("How much would you like to add?");
         String addedMoneyStr = userInput.nextLine();
         BigDecimal addedMoney;
         try {
             addedMoney = new BigDecimal(addedMoneyStr);
             if (addedMoney.remainder(BigDecimal.ONE).equals(BigDecimal.ZERO)) {
                 if (addedMoney.add(totalMoney).compareTo(BigDecimal.valueOf(100)) == 1) {
-                    System.out.println("Total can't go above $100");
+                    FormatUtils.getWarningMessage("Total can't go above $100");
                 } else {
                     totalMoney = totalMoney.add(addedMoney);
                     FileManager.logWriter("FEED MONEY:", addedMoney, totalMoney );
                 }
             } else {
-                System.out.println("Please enter a whole dollar amount.");
+                FormatUtils.getWarningMessage("Please enter a whole dollar amount.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid input.");
+            FormatUtils.getWarningMessage("Please enter a valid input.");
         }
 
     }
@@ -113,7 +110,7 @@ public class DisplayMenus {
                 coins.put(coinName, coin.intValue());
             }
 
-            System.out.println("Your change is " + Utility.formatMoney(currentChange));
+            FormatUtils.getMessage("Your change is " + FormatUtils.formatMoney(currentChange));
             coins.forEach((key, value) -> {
                 if (value != 0) {
                     System.out.println(key + ": " + value);
@@ -121,7 +118,7 @@ public class DisplayMenus {
             });
             FileManager.logWriter("GIVE CHANGE:", currentChange, totalMoney);
         } else {
-            System.out.println("No change");
+            FormatUtils.getMessage("No Change") ;
         }
     }
 

@@ -5,15 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class UtilityTest {
+class FormatUtilsTest {
 
     @Test
     void formatMoneyShouldReturnCorrectlyFormattedString() {
         BigDecimal test = new BigDecimal(10);
         String expected = "$10.00";
-        String result = Utility.formatMoney(test);
+        String result = FormatUtils.formatMoney(test);
 
         Assert.assertEquals(expected, result);
     }

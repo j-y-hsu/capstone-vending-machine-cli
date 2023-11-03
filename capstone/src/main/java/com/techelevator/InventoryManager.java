@@ -24,26 +24,26 @@ public class InventoryManager {
 
             if (item.isSoldOut()) {
 
-                System.out.println("Sorry, that item is sold out");
+               FormatUtils.getMessage("Sorry, that item is sold out");
 
             } else if (wallet.compareTo(item.getPrice()) >= 0) {
 
                 System.out.println(item.getProductName());
-                System.out.println(Utility.formatMoney(item.getPrice()));
+                System.out.println(FormatUtils.formatMoney(item.getPrice()));
                 System.out.println(item.getMessage());
                 item.decreaseAmount();
 
 
             } else {
 
-                System.out.println("Insufficient Funds");
+                FormatUtils.getWarningMessage("Insufficient Funds");
                 item = null;
             }
 
 
         } else {
 
-            System.out.println("That item does not exist. Please Try again");
+            FormatUtils.getWarningMessage("That item does not exist. Please Try again");
 
         }
 

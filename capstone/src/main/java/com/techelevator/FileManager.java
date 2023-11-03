@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -41,7 +40,7 @@ public class FileManager {
     public static void logWriter(String message, BigDecimal amount, BigDecimal total){
 
         File logFile = new File("log.txt");
-        String date = Utility.getLogDate();
+        String date = FormatUtils.getLogDate();
 
         try(PrintWriter writer = new PrintWriter(new FileOutputStream(logFile, true))){
 
@@ -54,7 +53,7 @@ public class FileManager {
     }
 
     public static void salesReport(InventoryManager inventoryManager) {
-        String salesReportPath = Utility.getReportDateTime() + ".txt";
+        String salesReportPath = FormatUtils.getReportDateTime() + ".txt";
         System.out.println(salesReportPath);
         File report = new File(salesReportPath);
 
@@ -68,7 +67,7 @@ public class FileManager {
                 totalSales = totalSales.add(item.getPrice().multiply(BigDecimal.valueOf(count)));
             }
 
-            writer.println("\n**TOTAL SALES** " + Utility.formatMoney(totalSales));
+            writer.println("\n**TOTAL SALES** " + FormatUtils.formatMoney(totalSales));
         } catch (FileNotFoundException ex) {
             System.out.println("File not found");
         }
