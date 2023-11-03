@@ -41,7 +41,7 @@ public class FileManager {
     public static void logWriter(String message, BigDecimal amount, BigDecimal total){
 
         File logFile = new File("log.txt");
-        Date date = new Date();
+        String date = Utility.getLogDate();
 
         try(PrintWriter writer = new PrintWriter(new FileOutputStream(logFile, true))){
 
@@ -54,7 +54,7 @@ public class FileManager {
     }
 
     public static void salesReport(InventoryManager inventoryManager) {
-        String salesReportPath = Utility.getDateTime() + ".txt";
+        String salesReportPath = Utility.getReportDateTime() + ".txt";
         System.out.println(salesReportPath);
         File report = new File(salesReportPath);
 
