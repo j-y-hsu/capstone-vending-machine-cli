@@ -115,7 +115,7 @@ class ItemTest {
     void testToStringShouldReturnCorrectStringWithFiveCount() {
         String[] values = {"B2", "Lays", "2.50", "Chip"};
         item = new Item(values);
-        String expected = "B2: Lays: $2.50: 5";
+        String expected = "B2 | Lays | $2.50 | 5";
         String result = item.toString();
         Assert.assertEquals(expected, result);
     }
@@ -124,7 +124,7 @@ class ItemTest {
     void testToStringShouldReturnCorrectStringWithSoldOut() {
         String[] values = {"B2", "Lays", "2.50", "Chip"};
         item = new Item(values);
-        String expected = "B2: Lays: $2.50: SOLD OUT";
+        String expected = "B2 | Lays | $2.50 | SOLD OUT";
 
         for (int i = 0; i < 5; i++) {
             item.decreaseAmount();

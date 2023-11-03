@@ -23,6 +23,13 @@ public class FormatUtils {
         return formatter.format(date);
     }
 
+    public static void displayItems(InventoryManager inventoryManager) {
+        System.out.println("slot | Name | Cost | Amount");
+        inventoryManager.getInventory().forEach((key, value) -> {
+            System.out.println(value);
+        });
+    }
+
 
     public static void getWarningMessage(String message){
         String exclamationPoint = "!".repeat(message.length() + 2);

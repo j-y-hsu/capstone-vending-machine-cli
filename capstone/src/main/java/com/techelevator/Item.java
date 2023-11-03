@@ -70,6 +70,6 @@ public class Item {
     @Override
     public String toString() {
         String itemCount = isSoldOut() ? "SOLD OUT" : String.valueOf(count);
-        return String.format("%s: %s: $%.2f: %s", slotLocation, productName, price, itemCount);
+        return String.format("%s | %s | $%.2f | %s", slotLocation, productName, price, itemCount);
     }
 }

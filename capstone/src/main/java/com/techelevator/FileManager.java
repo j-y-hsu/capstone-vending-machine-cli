@@ -54,7 +54,6 @@ public class FileManager {
 
     public static void salesReport(InventoryManager inventoryManager) {
         String salesReportPath = FormatUtils.getReportDateTime() + ".txt";
-        System.out.println(salesReportPath);
         File report = new File(salesReportPath);
 
         try (PrintWriter writer = new PrintWriter(report)) {

@@ -15,19 +15,13 @@ public class DisplayMenus {
     private static final String PURCHASE_MENU_FINISH_TRANSACTION = "Finish Transaction";
     private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_FEED_MONEY, PURCHASE_MENU_SELECT_PRODUCT, PURCHASE_MENU_FINISH_TRANSACTION};
     private BigDecimal totalMoney = BigDecimal.ZERO;
-
-    Scanner userInput = new Scanner(System.in);
-
-    private InventoryManager inventoryManager;
-    private Menu menu;
+    private final Scanner userInput = new Scanner(System.in);
+    private final InventoryManager inventoryManager;
+    private final Menu menu;
 
     public DisplayMenus(Menu menu, InventoryManager inventoryManager){
         this.menu = menu;
         this.inventoryManager = inventoryManager;
-    }
-
-    public void displayItems() {
-        inventoryManager.getInventory().forEach((key, value) -> System.out.println(value));
     }
 
     public void purchaseItem(){
@@ -41,7 +35,7 @@ public class DisplayMenus {
                 addMoney();
 
             } else if(choice.equals(PURCHASE_MENU_SELECT_PRODUCT)){
-                displayItems();
+                FormatUtils.displayItems(inventoryManager);
 
                 FormatUtils.getQuestionMessage("Enter the number of the item you would like: ");
                 String itemWanted = userInput.nextLine().toUpperCase();

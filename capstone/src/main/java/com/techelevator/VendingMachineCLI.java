@@ -24,7 +24,7 @@ public class VendingMachineCLI {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				displayMenus.displayItems();
+				FormatUtils.displayItems(inventory);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				displayMenus.purchaseItem();
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
