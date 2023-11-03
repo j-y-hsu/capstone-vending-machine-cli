@@ -30,8 +30,6 @@ public class DisplayMenus {
         inventoryManager.getInventory().forEach((key, value) -> System.out.println(value));
     }
 
-
-
     public void purchaseItem(){
 
         while(true){
@@ -49,7 +47,7 @@ public class DisplayMenus {
                 displayItems();
 
                 System.out.println("Enter the number of the item you would like: ");
-                String itemWanted = userInput.nextLine();
+                String itemWanted = userInput.nextLine().toUpperCase();
 
                 Item item = inventoryManager.purchaseItem(itemWanted, totalMoney);
 
@@ -62,22 +60,31 @@ public class DisplayMenus {
                 break;
             }
 
-
        }
 
-
-
-
     }
-
 
     public void addMoney(){
 
         System.out.println("How much would you like to add?");
         String addedMoneyStr = userInput.nextLine();
-        BigDecimal addedMoney = BigDecimal.valueOf(Double.parseDouble(addedMoneyStr));
-        totalMoney = totalMoney.add(addedMoney);
-        FileManager.logWriter("FEED MONEY:", addedMoney, totalMoney );
+        BigDecimal addedMoney;
+        try {
+            addedMoney = new BigDecimal(addedMoneyStr);
+            if (addedMoney.remainder(BigDecimal.ONE).equals(BigDecimal.ZERO)) {
+                if (addedMoney.add(totalMoney).compareTo(BigDecimal.valueOf(100)) == 1) {
+                    System.out.println("Total can't go above $100");
+                } else {
+                    totalMoney = totalMoney.add(addedMoney);
+                    FileManager.logWriter("FEED MONEY:", addedMoney, totalMoney );
+                }
+            } else {
+                System.out.println("Please enter a whole dollar amount.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid input.");
+        }
+
     }
 
     public void finishTransaction() {
@@ -117,7 +124,5 @@ public class DisplayMenus {
             System.out.println("No change");
         }
     }
-
-
 
 }
