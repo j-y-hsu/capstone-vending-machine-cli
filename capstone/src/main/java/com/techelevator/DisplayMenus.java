@@ -33,7 +33,7 @@ public class DisplayMenus {
     public void purchaseItem(){
 
         while(true){
-            FormatUtils.getMessage("Current Money Provided: " + FormatUtils.formatMoney(totalMoney)2);
+            FormatUtils.getHeaderMessage("Current Money Provided: " + FormatUtils.formatMoney(totalMoney));
             String choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
             if(choice.equals(PURCHASE_MENU_FEED_MONEY)){
@@ -43,7 +43,7 @@ public class DisplayMenus {
             } else if(choice.equals(PURCHASE_MENU_SELECT_PRODUCT)){
                 displayItems();
 
-                FormatUtils.getMessage("Enter the number of the item you would like: ");
+                FormatUtils.getQuestionMessage("Enter the number of the item you would like: ");
                 String itemWanted = userInput.nextLine().toUpperCase();
 
                 Item item = inventoryManager.purchaseItem(itemWanted, totalMoney);
@@ -63,7 +63,7 @@ public class DisplayMenus {
 
     public void addMoney(){
 
-        FormatUtils.getMessage("How much would you like to add?");
+        FormatUtils.getQuestionMessage("How much would you like to add?");
         String addedMoneyStr = userInput.nextLine();
         BigDecimal addedMoney;
         try {
@@ -110,7 +110,7 @@ public class DisplayMenus {
                 coins.put(coinName, coin.intValue());
             }
 
-            FormatUtils.getMessage("Your change is " + FormatUtils.formatMoney(currentChange));
+            FormatUtils.getHeaderMessage("Your change is " + FormatUtils.formatMoney(currentChange));
             coins.forEach((key, value) -> {
                 if (value != 0) {
                     System.out.println(key + ": " + value);
@@ -118,7 +118,7 @@ public class DisplayMenus {
             });
             FileManager.logWriter("GIVE CHANGE:", currentChange, totalMoney);
         } else {
-            FormatUtils.getMessage("No Change") ;
+            FormatUtils.getHeaderMessage("No Change") ;
         }
     }
 

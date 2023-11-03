@@ -25,25 +25,32 @@ public class FormatUtils {
 
 
     public static void getWarningMessage(String message){
-        String space = " ".repeat(message.length() + 2);
         String exclamationPoint = "!".repeat(message.length() + 2);
 
-        System.out.println(space);
+        System.out.println();
         System.out.println(exclamationPoint);
         System.out.println(" " + message + " ");
         System.out.println(exclamationPoint);
     }
 
-    public static void getMessage(String message){
+    public static void getHeaderMessage(String message){
 
-        String space = " ".repeat(message.length() + 2);
         String asterisk = "*".repeat(message.length() + 2);
 
-        System.out.println(space);
+        System.out.println();
         System.out.println(asterisk);
         System.out.println(" " + message + " ");
         System.out.println(asterisk);
 
+    }
+
+    public static void getQuestionMessage(String message) {
+        String questionMark = "?".repeat(message.length() + 2);
+
+        System.out.println();
+        System.out.println(questionMark);
+        System.out.println(" " + message + " ");
+        System.out.println(questionMark);
     }
 
 }

@@ -14,7 +14,7 @@ public class Item {
     public Item(String[] values) {
         this.slotLocation = values[0];
         this.productName = values[1];
-        this.price = BigDecimal.valueOf(Double.parseDouble(values[2]));
+        this.price = new BigDecimal(values[2]);
         this.type = values[3];
     }
 
@@ -40,11 +40,11 @@ public class Item {
 
     public String getMessage() {
         String message = "";
-        if (type.equals("Chips")) {
+        if (type.equals("Chip")) {
             message = "Crunch Crunch, Yum!";
         } else if (type.equals("Candy")) {
             message = "Munch Munch, Yum!";
-        } else if (type.equals("drink")) {
+        } else if (type.equals("Drink")) {
             message = "Glug Glug, Yum!";
         } else if (type.equals("Gum")) {
             message ="Chew Chew, Yum!";
@@ -70,7 +70,6 @@ public class Item {
     @Override
     public String toString() {
         String itemCount = isSoldOut() ? "SOLD OUT" : String.valueOf(count);
-        String string = String.format("%s: %s: $%.2f: %s", slotLocation, productName, price, itemCount);
-        return string;
+        return String.format("%s: %s: $%.2f: %s", slotLocation, productName, price, itemCount);
     }
 }

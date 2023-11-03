@@ -24,7 +24,7 @@ public class InventoryManager {
 
             if (item.isSoldOut()) {
 
-               FormatUtils.getMessage("Sorry, that item is sold out");
+               FormatUtils.getHeaderMessage("Sorry, that item is sold out");
 
             } else if (wallet.compareTo(item.getPrice()) >= 0) {
 
